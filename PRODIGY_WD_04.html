@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivek Kumar - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #ffd700;
+            color: #333;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .about {
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 300px 1fr 2fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        /* Profile Photo Styles */
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-photo-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .profile-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid #667eea;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInScale 1s ease;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.4);
+        }
+
+        .profile-photo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .profile-photo-container:hover .profile-photo-overlay {
+            opacity: 1;
+        }
+
+        .profile-placeholder {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4em;
+            font-weight: bold;
+            border: 6px solid #667eea;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInScale 1s ease;
+        }
+
+        .profile-placeholder:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.4);
+        }
+
+        .profile-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .profile-title {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #667eea;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease, background 0.3s ease;
+            font-size: 1.2em;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            background: #5a6fd8;
+        }
+
+        .about-info h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .projects {
+            background: #f8f9fa;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .project-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .project-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .tech-tag {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+
+        .project-demo {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .demo-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background 0.3s;
+        }
+
+        .demo-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .skills {
+            background: white;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .skill-category h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            background: white;
+            margin: 10px 0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        /* Demo Styles */
+        .demo-area {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .stopwatch {
+            text-align: center;
+        }
+
+        .time-display {
+            font-size: 3em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .tictactoe {
+            text-align: center;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .cell {
+            background: white;
+            border: 2px solid #667eea;
+            font-size: 2em;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .cell:hover {
+            background: #f0f0f0;
+        }
+
+        .game-status {
+            font-size: 1.2em;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5em;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .profile-photo,
+            .profile-placeholder {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .about-content {
+                grid-template-columns: 250px 1fr;
+                gap: 30px;
+            }
+
+            .about-info {
+                grid-column: 1 / -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Vivek Kumar</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Vivek Kumar</h1>
+            <p>Computer Engineering Student & Full-Stack Developer</p>
+            <a href="#projects" class="btn">View My Work</a>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <!-- Profile Photo Section -->
+                <div class="profile-section">
+                    <div class="profile-photo-container">
+                        <!-- Replace this placeholder with actual photo -->
+                        <div class="profile-placeholder">VK</div>
+                        <!-- Uncomment and use this when you have a photo -->
+                        <!-- <img src="your-photo.jpg" alt="Vivek Kumar" class="profile-photo"> -->
+                        <div class="profile-photo-overlay">
+                            <span>Vivek Kumar</span>
+                        </div>
+                    </div>
+                    <div class="profile-name">Vivek Kumar</div>
+                    <div class="profile-title">Computer Engineering Student</div>
+                    <div class="social-links">
+                        <a href="mailto:vkumar23-comp@bvucoep.edu.in" class="social-link">✉</a>
+                        <a href="https://github.com/302004vivekkumar" class="social-link" target="_blank">G</a>
+                        <a href="tel:+918986863022" class="social-link">📞</a>
+                    </div>
+                </div>
+
+                <div class="about-info">
+                    <h3>Education</h3>
+                    <p><strong>B.Tech Computer Engineering</strong><br>
+                    Bharati Vidyapeeth College of Engineering, Pune<br>
+                    CGPA: 8.58 | Expected Graduation: 2027</p>
+                    
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <p>📧 vkumar23-comp@bvucoep.edu.in</p>
+                        <p>📱 +91 8986863022</p>
+                        <p>🌍 Jamshedpur, India</p>
+                        <p>💻 GitHub: 302004vivekkumar</p>
+                    </div>
+                </div>
+                <div>
+                    <p>I'm a passionate Computer Engineering student with a strong foundation in full-stack development. I love creating innovative solutions and learning new technologies. My experience spans from web development to AI applications, and I'm always eager to take on new challenges.</p>
+                    
+                    <p>Currently pursuing my Bachelor's degree with a focus on practical application of theoretical concepts. I believe in learning by doing and have developed several projects that demonstrate my skills in various technologies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+                
+                <!-- Student Management System -->
+                <div class="project-card">
+                    <h3>Student Management System</h3>
+                    <p>A comprehensive full-stack web application for managing student data, including registration, attendance, grading, and course management with role-based access control.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                    </div>
+                </div>
+
+                <!-- Stopwatch -->
+                <div class="project-card">
+                    <h3>Digital Stopwatch</h3>
+                    <p>A precise digital stopwatch with start, stop, reset, and lap time functionality. Features a clean interface with millisecond accuracy.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-demo">
+                        <button class="demo-btn" onclick="toggleDemo('stopwatch-demo')">Try Demo</button>
+                        <div id="stopwatch-demo" class="demo-area">
+                            <div class="stopwatch">
+                                <div id="timeDisplay" class="time-display">00:00:00</div>
+                                <button class="demo-btn" onclick="startStopwatch()">Start</button>
+                                <button class="demo-btn" onclick="stopStopwatch()">Stop</button>
+                                <button class="demo-btn" onclick="resetStopwatch()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tic Tac Toe -->
+                <div class="project-card">
+                    <h3>Tic Tac Toe with AI</h3>
+                    <p>Interactive Tic Tac Toe game featuring both Human vs Human and Human vs AI modes. The AI uses strategic algorithms to provide a challenging opponent.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">AI Logic</span>
+                    </div>
+                    <div class="project-demo">
+                        <button class="demo-btn" onclick="toggleDemo('tictactoe-demo')">Try Demo</button>
+                        <div id="tictactoe-demo" class="demo-area">
+                            <div class="tictactoe">
+                                <div class="game-status" id="gameStatus">Player X's Turn</div>
+                                <div class="game-board" id="gameBoard"></div>
+                                <button class="demo-btn" onclick="resetTicTacToe()">New Game</button>
+                                <button class="demo-btn" onclick="toggleAI()">Toggle AI Mode</button>
+                                <p id="aiMode">Mode: Human vs Human</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Data Usage Tracker -->
+                <div class="project-card">
+                    <h3>Mobile Data Usage Tracker</h3>
+                    <p>Python application with both CLI and GUI interfaces to monitor real-time mobile data usage, featuring analytics and threshold alerts.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">GUI</span>
+                        <span class="tech-tag">Data Analytics</span>
+                    </div>
+                </div>
+
+                <!-- Netflix Clone -->
+                <div class="project-card">
+                    <h3>Netflix Clone Frontend</h3>
+                    <p>Responsive frontend clone of Netflix with movie cards, sliders, and dynamic layouts. Simulates content display using mock data.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Responsive Design</span>
+                    </div>
+                </div>
+
+                <!-- AI Voice Assistant -->
+                <div class="project-card">
+                    <h3>AI Voice Assistant</h3>
+                    <p>Voice-controlled assistant capable of web searches, opening applications, time queries, and basic conversation using speech recognition and NLP.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Speech Recognition</span>
+                        <span class="tech-tag">NLP</span>
+                    </div>
+                </div>
+
+                <!-- Dynamic Event Calendar -->
+                <div class="project-card">
+                    <h3>Dynamic Event Calendar</h3>
+                    <p>Interactive calendar web application allowing users to add, edit, and delete events with local storage for data persistence across sessions.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Local Storage</span>
+                    </div>
+                </div>
+
+                <!-- Cold Mail Generator -->
+                <div class="project-card">
+                    <h3>Cold Mail Generator</h3>
+                    <p>Automation tool for generating personalized cold emails with dynamic content insertion, pre-defined templates, and export functionality.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Web Development</span>
+                        <span class="tech-tag">Automation</span>
+                        <span class="tech-tag">Templates</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <ul class="skill-list">
+                        <li>Java (Intermediate)</li>
+                        <li>Python (Intermediate)</li>
+                        <li>C (Intermediate)</li>
+                        <li>JavaScript</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Web Development</h3>
+                    <ul class="skill-list">
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                        <li>JavaScript</li>
+                        <li>Node.js</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <ul class="skill-list">
+                        <li>SQL</li>
+                        <li>MongoDB</li>
+                        <li>DBMS Concepts</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Others</h3>
+                    <ul class="skill-list">
+                        <li>Git & GitHub</li>
+                        <li>Linux</li>
+                        <li>VS Code</li>
+                        <li>Microsoft Excel</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Vivek Kumar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Stopwatch functionality
+        let stopwatchTime = 0;
+        let stopwatchInterval;
+        let isStopwatchRunning = false;
+
+        function updateStopwatchDisplay() {
+            const minutes = Math.floor(stopwatchTime / 60000);
+            const seconds = Math.floor((stopwatchTime % 60000) / 1000);
+            const milliseconds = Math.floor((stopwatchTime % 1000) / 10);
+            
+            document.getElementById('timeDisplay').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${milliseconds.toString().padStart(2, '0')}`;
+        }
+
+        function startStopwatch() {
+            if (!isStopwatchRunning) {
+                const startTime = Date.now() - stopwatchTime;
+                stopwatchInterval = setInterval(() => {
+                    stopwatchTime = Date.now() - startTime;
+                    updateStopwatchDisplay();
+                }, 10);
+                isStopwatchRunning = true;
+            }
+        }
+
+        function stopStopwatch() {
+            if (isStopwatchRunning) {
+                clearInterval(stopwatchInterval);
+                isStopwatchRunning = false;
+            }
+        }
+
+        function resetStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchTime = 0;
+            isStopwatchRunning = false;
+            updateStopwatchDisplay();
+        }
+
+        // Tic Tac Toe functionality
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let currentPlayer = 'X';
+        let gameActive = true;
+        let isAIMode = false;
+
+        function initTicTacToe() {
+            const gameBoard = document.getElementById('gameBoard');
+            gameBoard.innerHTML = '';
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.setAttribute('data-index', i);
+                cell.addEventListener('click', handleCellClick);
+                gameBoard.appendChild(cell);
+            }
+        }
+
+        function handleCellClick(event) {
+            const index = event.target.getAttribute('data-index');
+            
+            if (board[index] !== '' || !gameActive) return;
+            
+            makeMove(index, currentPlayer);
+            
+            if (gameActive && isAIMode && currentPlayer === 'O') {
+                setTimeout(() => {
+                    makeAIMove();
+                }, 500);
+            }
+        }
+
+        function makeMove(index, player) {
+            board[index] = player;
+            document.querySelector(`[data-index="${index}"]`).textContent = player;
+            
+            if (checkWinner()) {
+                document.getElementById('gameStatus').textContent = `Player ${player} Wins!`;
+                gameActive = false;
+                return;
+            }
+            
+            if (board.every(cell => cell !== '')) {
+                document.getElementById('gameStatus').textContent = "It's a Draw!";
+                gameActive = false;
+                return;
+            }
+            
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            document.getElementById('gameStatus').textContent = `Player ${currentPlayer}'s Turn`;
+        }
+
+        function makeAIMove() {
+            const availableMoves = board.map((cell, index) => cell === '' ? index : null).filter(val => val !== null);
+            
+            if (availableMoves.length === 0) return;
+            
+            // Simple AI: Try to win, then block, then random
+            let move = findWinningMove('O') || findWinningMove('X') || availableMoves[Math.floor(Math.random() * availableMoves.length)];
+            
+            makeMove(move, 'O');
+        }
+
+        function findWinningMove(player) {
+            const winningCombos = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+            
+            for (let combo of winningCombos) {
+                const [a, b, c] = combo;
+                if (board[a] === player && board[b] === player && board[c] === '') return c;
+                if (board[a] === player && board[c] === player && board[b] === '') return b;
+                if (board[b] === player && board[c] === player && board[a] === '') return a;
+            }
+            return null;
+        }
+
+        function checkWinner() {
+            const winningCombos = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+            
+            return winningCombos.some(combo => {
+                const [a, b, c] = combo;
+                return board[a] && board[a] === board[b] && board[a] === board[c];
+            });
+        }
+
+        function resetTicTacToe() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            currentPlayer = 'X';
+            gameActive = true;
+            document.getElementById('gameStatus').textContent = "Player X's Turn";
+            initTicTacToe();
+        }
+
+        function toggleAI() {
+            isAIMode = !isAIMode;
+            document.getElementById('aiMode').textContent = isAIMode ? 'Mode: Human vs AI' : 'Mode: Human vs Human';
+            resetTicTacToe();
+        }
+
+        function toggleDemo(demoId) {
+            const demo = document.getElementById(demoId);
+            const isVisible = demo.style.display === 'block';
+            
+            // Hide all demos
+            document.querySelectorAll('.demo-area').forEach(area => {
+                area.style.display
